@@ -1,0 +1,32 @@
+﻿@model MvcAppPager.Models.PageOfList<MvcAppPager.Models.Order>
+@{
+    ViewBag.Title = "Index";
+}
+
+@Styles.Render("~/Content/page.css")
+
+@using (Html.BeginForm("Index","Home",FormMethod.Get))
+{
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>订单号</th>
+            <th>运单号</th>
+            <th>运费</th>
+        </tr>
+        @if (Model !=null && Model.Count>0)
+        {
+            foreach (var item in Model.ToList())
+            {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.OrderNo</td>
+                    <td>@item.EMS</td>
+                    <td>@item.WayFee</td>
+                </tr>
+            }
+        }
+    </table>
+    //Html.RenderPartial("pager", Model);
+    @MvcAppPager.Models.ExtHelper.UlPaging(this.Html, Model)
+}

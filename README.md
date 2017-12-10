@@ -4,4 +4,4 @@
 - [x] MvcControllerApp
 - [x] MvcModelApp
 - [x] HtmlHelperApp
-- [ ] MvcAppPager
+- [x] MvcAppPager
