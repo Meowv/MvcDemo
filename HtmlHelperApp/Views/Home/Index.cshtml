@@ -1,0 +1,28 @@
+﻿@model HtmlHelperApp.Models.User
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Label("Id")
+
+@Html.TextBox("Id")
+
+@Html.RadioButton("Sex", "male", true) 男<br />
+
+@Html.RadioButton("Sex", "female", true) 女
+
+@Html.Hidden("Id")
+
+@Html.Password("pwd")
+
+@Html.Label("UserName")
+
+@Html.TextBoxFor(m => m.UserName)
+
+@Html.EditorFor(a => a.Remark)
+
+@Html.LabelFor(model => model.UserName)
+
+@Html.DisplayFor(model=>model.Remark)：@Html.EditorFor(a => a.Remark)
+
+@Html.Raw(Html.UserShow())

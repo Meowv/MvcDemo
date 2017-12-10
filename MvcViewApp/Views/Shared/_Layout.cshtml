@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "我是模板页面";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <h2>欢迎光临</h2>
+    @RenderBody() @*模板页占位符*@
+    
+    <footer>
+        @if (IsSectionDefined("Footer"))
+        {
+            @RenderSection("Footer");
+        }
+        else
+        {
+            <b>子页面没有设置Footer节点</b>
+        }
+    </footer>
+</body>
+</html>

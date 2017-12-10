@@ -1,0 +1,10 @@
+﻿@model MvcControllerApp.Models.Customers
+@{
+    ViewBag.Title = "UpdateCustomerInfo";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.TextBoxFor(x => x.ContactName)
+    <input type="submit" value="修改" />
+}

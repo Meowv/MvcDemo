@@ -1,0 +1,115 @@
+﻿@model MvcViewApp.Models.User
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h2>百晓生兵器谱排行榜</h2>
+    <p>第一名：@ViewData["One"]</p>
+    <p>第二名：@ViewBag.Two</p>
+    <p>第三名：@Model.Name</p>
+    <p>第四名：@TempData["Four"]</p>
+
+    @*C#变量*@
+    @{ 
+        string company = "上海盖世网络技术有限公司";
+    }
+    <p>公司：@company</p>
+
+    @*邮件中使用@符号*@
+    <p>hackxing@foxmail.com</p>
+    @*<p>hackxing @foxmail.com</p>*@ @*错误用法*@
+
+    @*输出HTML*@
+    @Html.Raw("<b>周末快乐！</b>")
+
+    @*js字符串编码*@
+    <script>
+        alert('@Ajax.JavaScriptStringEncode("阿星Plus")');
+    </script>
+
+    @* 代码块 *@
+    @{ 
+        string a = "meowv";
+        int age = 22;
+    }
+    
+    @*注释*@
+    @* 调用泛型方法 *@
+    
+    @* 混合代码与文本 *@
+    @if (1 == 1)
+    {
+        <text>我要输出罗伊人！</text>
+        @:我要输出罗伊人
+    }
+
+    @* @转义*@
+    @@
+
+    @* 操作Web内置对象 *@
+    @Request.RawUrl
+    @{
+        Response.Write("阿星Plus");
+    }
+
+    @*@作用域与HTML标记混合使用*@
+    @{ 
+        string userName = "刘备";
+        <p>@userName</p>
+    }
+
+    @*使用字符串描述输出*@
+    @{ 
+        string strHtml = "<p>你好~</p>";
+        @strHtml
+    }
+
+    @*使用HTMLHelper输出*@
+    @{ 
+        @Html.Raw("<p>你好~</p>");
+    }
+
+    @*使用HtmlString输出*@
+    @{ 
+        HtmlString htm = new HtmlString("<p>你好~</p>");
+        @htm
+    }
+
+    @*使用MvcHtmlString输出*@
+    @{ 
+        var html = MvcHtmlString.Create("<p>你好~</p>");
+        @html
+    }
+
+    @*数据类型转换*@
+    @("120".AsInt())
+
+    @*数据类型判断*@
+    @{
+        string strAge = "22";
+        @(strAge.IsInt() ? "是" : "否")
+    } 
+    
+    @*路径用Href()*@
+    @Href("~/Home/Index")
+
+    @*HtmlHelper重用 视图中定义方法*@
+    @helper List(List<string> dogs) { 
+        <ul>
+            @foreach (string s in dogs)
+            {
+                <li>@s</li>
+            }
+        </ul>
+    }
+    @List(new List<string>() { "wuyang", "lizheng", "hahhhhh" })
+</body>
+</html>
