@@ -1,0 +1,10 @@
+﻿@model PagedList<MvcAppPager.Models.Order>
+@using Webdiyer.WebControls.Mvc;
+
+@Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+@{
+    Html.RenderPartial("OrderList", Model);
+}
+<div>@DateTime.Now.ToString()</div>

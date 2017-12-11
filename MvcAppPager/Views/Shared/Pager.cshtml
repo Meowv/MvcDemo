@@ -1,0 +1,77 @@
+﻿@model MvcAppPager.Models.IPageOfList
+@Styles.Render("~/Content/page.css")
+<div class="fenye">
+    <span>共 @Model.RecordTotal 条 记录，每页 @Model.PageSize 条 &nbsp;</span>
+    @{
+        System.Web.Routing.RouteValueDictionary route = new System.Web.Routing.RouteValueDictionary();
+        foreach (var key in Html.ViewContext.RouteData.Values.Keys)
+        {
+            route[key] = Html.ViewContext.RouteData.Values[key];
+        }
+
+        foreach (string key in Html.ViewContext.RequestContext.HttpContext.Request.QueryString)
+        {
+            route[key] = Html.ViewContext.RequestContext.HttpContext.Request.QueryString[key];
+        }
+        if (Model.PageIndex <= 0)
+        {
+            <a class="backpage" href="javascript:void(0);">上一页</a>
+        }
+        else
+        {
+            route["pageIndex"] = Model.PageIndex - 1;
+            Html.ActionLink("上一页", route["action"].ToString(), route).ToHtmlString();
+        }
+
+        if (Model.PageIndex > 3)
+        {
+            route["pageIndex"] = 0;
+            Html.ActionLink("<b>1</b>", route["action"].ToString(), route).ToHtmlString().Replace("&lt;", "<").Replace("&gt;", ">");
+
+            if (Model.PageIndex >= 5)
+            {
+                <a href='#'>..</a>;
+            }
+        }
+
+        for (int i = Model.PageIndex - 2; i <= Model.PageIndex; i++)
+        {
+            if (i < 1)
+            { continue; }
+            route["pageIndex"] = i - 1;
+            @Html.ActionLink(i.ToString(), route["action"].ToString(), route["controller"]);
+
+        }
+
+        <a class='active' href='#'><b> @(Model.PageIndex + 1) </b></a>
+        for (var i = Model.PageIndex + 2; i <= Model.PageIndex + 4; i++)
+        {
+            if (i > Model.PageTotal)
+            { continue; }
+            else
+            {
+                route["pageIndex"] = i - 1;
+                @Html.ActionLink(i.ToString(), route["action"].ToString(), route);
+            }
+        }
+
+        if (Model.PageIndex < Model.PageTotal - 4)
+        {
+            if (Model.PageIndex <= Model.PageTotal - 6)
+            {
+                <a href='#'>..</a>
+            }
+            route["pageIndex"] = Model.PageTotal - 1;
+            @Html.ActionLink(Model.PageTotal.ToString(), route["action"].ToString(), route).ToHtmlString();
+        }
+        if (Model.PageIndex < Model.PageTotal - 1)
+        {
+            route["pageIndex"] = Model.PageIndex + 1;
+            Html.ActionLink("下一页", route["action"].ToString(), route).ToHtmlString();
+        }
+        else
+        {
+            <a class="nextpage" href="javascript:void(0);">下一页</a>
+        }
+    }
+</div>
